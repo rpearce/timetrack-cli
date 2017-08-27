@@ -1,5 +1,5 @@
 # timetrack-cli
-WORK IN PROGRESS
+WORK IN PROGRESS. I'm new to Haskell and don't know what I'm doing. One day!
 
 ## Plan
 The idea is that you can use the command line to keep track of your working hours in plain text files, similar to https://github.com/ginatrapani/todo.txt-cli.
@@ -45,3 +45,9 @@ $ tt remove 12
 => Removed from my-file.txt:
    ├── 12..2017-06-03..extracted JSON decoders to separate file – @elmcompany +02:00
 ```
+
+## Dev
+1. need to have the stack tool
+1. Edit code in `src/` directory
+1. run `$ stack build --copy-bins` to get a binary copied to `/usr/.local/bin`
+1. use the CLI
