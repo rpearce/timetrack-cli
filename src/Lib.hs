@@ -3,8 +3,9 @@ module Lib
     ) where
 
 import System.IO
-import System.Directory
-import System.Environment (getArgs)
+import System.Directory (removeFile, renameFile)
+import System.Environment (getArgs, lookupEnv)
+import Data.Maybe (fromMaybe)
 {-import Data.List.Split (splitOn)-}
 {-import Data.Time-}
 
@@ -13,19 +14,26 @@ timeTrack = do
     args <- getArgs
     case args of
         ["add", date, text] -> add date text
-        ["remove", n]       -> putStrLn $ "Remove line " ++ n ++ " (COMING SOON)"
+        ["rm", n]           -> putStrLn $ "Remove line " ++ n ++ " (COMING SOON)"
         ["ls"]              -> ls
-        otherwise           -> putStrLn "Please either use `add` or `remove`"
+        otherwise           -> putStrLn "Please either use `add`, `rm` or `ls`"
 
-filePath :: String
-filePath = "/Users/rpearce/Dropbox/hours.txt"
+defaultPath :: String
+defaultPath =
+    "/Users/rpearce/Dropbox/timetrack.txt"
 
 add :: String -> String -> IO ()
 add date text = do
+    filePath <- fromMaybe defaultPath <$> lookupEnv "TIMETRACK_PATH"
     rows <- readLines filePath
     let
+        tmpFilePath :: String
         tmpFilePath = filePath ++ ".tmp"
+
+        newLine :: String
         newLine = show (nextRowNum rows) ++ ".." ++ date ++ ".." ++ text
+
+        updatedRows :: [String]
         updatedRows = rows ++ [newLine]
 
     writeFile tmpFilePath $ unlines updatedRows
@@ -36,6 +44,7 @@ add date text = do
 
 ls :: IO ()
 ls = do
+    filePath <- fromMaybe defaultPath <$> lookupEnv "TIMETRACK_PATH"
     rows <- readLines filePath
     putStrLn $ unlines rows
 
@@ -53,4 +62,4 @@ inc n =
 
 indentedOutput :: String -> String
 indentedOutput str =
-    "   ├──" ++ str
+    "   ├── " ++ str
