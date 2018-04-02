@@ -25,6 +25,8 @@ Example problem statement:
 ### List entries
 ```
 $ tt ls
+#  Date        Description
+-  ----------  -----------
 1  2017-06-01  "mailers, tests and bug fixes for @company1 +3.5"
 2  2017-06-02  "@company2: searching functionality +8.0"
 ```
