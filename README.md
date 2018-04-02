@@ -11,8 +11,8 @@ These files would be broken into current and archive files:
 Here's what the output looks like (subject to slight change):
 
 ```txt
-1  2017-06-01  "mailers, tests and bug fixes for @company1 +3.5"
-2  2017-06-02  "@company2: searching functionality +8.0"
+1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+2  2017-06-02  @company2: searching functionality +8.0
 ```
 
 This allows us to keep track of work done in specific contexts, programmatically sum the hours worked in total (for said company or otherwise) and do so between dates.
@@ -27,8 +27,8 @@ Example problem statement:
 $ tt ls
 #  Date        Description
 -  ----------  -----------
-1  2017-06-01  "mailers, tests and bug fixes for @company1 +3.5"
-2  2017-06-02  "@company2: searching functionality +8.0"
+1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+2  2017-06-02  @company2: searching functionality +8.0
 ```
 
 #### OPTIONS
@@ -40,7 +40,7 @@ $ tt ls
 ```
 $ tt add -d 2017-12-25 -m "extracted JSON decoders – @elmcompany +2.0"
 => Wrote to ~/timetrack/timetrack.txt:
-   ├── 12  2017-06-03  "extracted JSON decoders to separate file – @elmcompany +2.0"
+   ├── 12  2017-06-03  extracted JSON decoders to separate file – @elmcompany +2.0
 ```
 
 #### OPTIONS
@@ -55,12 +55,12 @@ $ tt add -d 2017-12-25 -m "extracted JSON decoders – @elmcompany +2.0"
 ### Removing an entry
 ```
 $ tt ls
-1  2017-06-01  "mailers, tests and bug fixes for @company1 +3.5"
-2  2017-06-02  "@company2: searching functionality +8.0"
+1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+2  2017-06-02  @company2: searching functionality +8.0
 
 $ tt rm -n 2
 => Removed from ~/timetrack/timetrack.txt:
-   ├── 2  2017-06-02  "@company2: searching functionality +8.0"
+   ├── 2  2017-06-02  @company2: searching functionality +8.0
 ```
 
 #### OPTIONS
@@ -71,14 +71,14 @@ $ tt rm -n 2
 ### Update an entry
 ```
 $ tt ls
-1  2017-06-01  "mailers, tests and bug fixes for @company1 +3.5"
-2  2017-06-02  "research and prototyping for @company3 +4.0"
-3  2017-06-03  "@company2: searching functionality +8.0"
+1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+2  2017-06-02  research and prototyping for @company3 +4.0
+3  2017-06-03  @company2: searching functionality +8.0
 
 $ tt update -n 2 -d 2017-06-04 -m "meetings and more for @company3 +7.5"
 => Updated in ~/timetrack/timetrack.txt:
-  (from) ├── 2  2017-06-02  "research and prototyping for @company3 +4.0"
-    (to) ├── 3  2017-06-04  "meetings and more for @company3 +7.5"
+  (from) ├── 2  2017-06-02  research and prototyping for @company3 +4.0
+    (to) ├── 3  2017-06-04  meetings and more for @company3 +7.5
 ```
 
 #### OPTIONS
