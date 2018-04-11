@@ -1,5 +1,6 @@
 module Commands
-    ( ls
+    ( add
+    , ls
     ) where
 
 
@@ -8,7 +9,20 @@ import           System.Directory (getAppUserDataDirectory)
 import           System.IO        (readFile)
 
 
-{- LIST -}
+-- ADD
+
+
+add :: [String] -> IO ()
+add []              = putStrLn "No arguments provided.\nFor help: timetrack add --help"
+add ["-h"]          = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
+add ["--help"]      = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
+add [_]             = putStrLn "Not enough arguments provided.\nFor help: timetrack add --help"
+add [date, message] = do
+    putStrLn date
+    putStrLn message
+
+
+-- LIST
 
 
 ls :: [String] -> IO ()
