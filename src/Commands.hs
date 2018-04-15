@@ -45,6 +45,11 @@ parseEntry n entry =
         Entry { index = n, date = date, message = message }
 
 
+printEntries :: [Entry] -> IO ()
+printEntries =
+    putStrLn . unlines . map show
+
+
 -- ADD
 
 
@@ -58,7 +63,7 @@ add [date, message] = do
     let entries = parseEntries loadedLines
         index = fromIntegral $ length entries
         newEntry = Entry { index = index + 1, date = date, message = message }
-    putStrLn $ unlines $ map show $ entries ++ [newEntry]
+    printEntries $ entries ++ [newEntry]
 
 
 -- LIST
@@ -69,4 +74,4 @@ ls _ = do
     loadedLines <- loadEntries
     putStrLn "#  Date        Description"
     putStrLn "-  ----------  -----------"
-    putStrLn $ unlines $ map show $ parseEntries loadedLines
+    printEntries $ parseEntries loadedLines
