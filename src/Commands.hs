@@ -9,6 +9,42 @@ import           System.Directory (getAppUserDataDirectory)
 import           System.IO        (readFile)
 
 
+data Entry = Entry
+    { index   :: Integer
+    , date    :: String
+    , message :: String
+    }
+
+
+instance Show Entry where
+    show (Entry index entry message) =
+        show index ++ "  " ++ entry ++ "  " ++ message
+
+
+-- HELPERS
+
+
+loadEntries :: IO [String]
+loadEntries = do
+    path <- getAppUserDataDirectory "timetrack"
+    contents <- readFile $ path ++ "/timetrack.txt"
+    return $ lines contents
+
+
+parseEntries :: [String] -> [Entry]
+parseEntries =
+    zipWith parseEntry [1..]
+
+
+parseEntry :: Integer -> String -> Entry
+parseEntry n entry =
+    let
+        (date, rest) = splitAt 10 entry
+        message = drop 1 rest
+    in
+        Entry { index = n, date = date, message = message }
+
+
 -- ADD
 
 
@@ -18,8 +54,10 @@ add ["-h"]          = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
 add ["--help"]      = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
 add [_]             = putStrLn "Not enough arguments provided.\nFor help: timetrack add --help"
 add [date, message] = do
+    loadedLines <- loadEntries
     putStrLn date
     putStrLn message
+    print $ map index $ parseEntries loadedLines
 
 
 -- LIST
@@ -27,27 +65,7 @@ add [date, message] = do
 
 ls :: [String] -> IO ()
 ls _ = do
-    path <- getAppUserDataDirectory "timetrack"
-    contents <- readFile $ path ++ "/timetrack.txt"
+    loadedLines <- loadEntries
     putStrLn "#  Date        Description"
     putStrLn "-  ----------  -----------"
-    putStr $ handleLs contents
-
-
-handleLs :: String -> String
-handleLs =
-    unlines . buildEntries . lines
-
-
-buildEntries :: [String] -> [String]
-buildEntries =
-    zipWith buildEntry [1..]
-
-
-buildEntry :: Integer -> String -> String
-buildEntry n entry =
-    let
-        (date, rest) = splitAt 10 entry
-        content = drop 1 rest
-    in
-        show n ++ "  " ++ date ++ "  " ++ content
+    putStrLn $ unlines $ map show $ parseEntries loadedLines
