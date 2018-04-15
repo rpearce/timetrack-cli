@@ -55,9 +55,10 @@ add ["--help"]      = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
 add [_]             = putStrLn "Not enough arguments provided.\nFor help: timetrack add --help"
 add [date, message] = do
     loadedLines <- loadEntries
-    putStrLn date
-    putStrLn message
-    print $ map index $ parseEntries loadedLines
+    let entries = parseEntries loadedLines
+        index = fromIntegral $ length entries
+        newEntry = Entry { index = index + 1, date = date, message = message }
+    putStrLn $ unlines $ map show $ entries ++ [newEntry]
 
 
 -- LIST
