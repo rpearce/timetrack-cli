@@ -3,26 +3,11 @@ module Lib
     ) where
 
 
-import           Commands           (add, ls)
+import           Commands.Add       (add)
+import           Commands.Help      (help)
+import           Commands.List      (ls)
+import           Commands.NotFound  (notFound)
 import           System.Environment (getArgs)
-
-
-cmds :: String
-cmds =
-    "usage: timetrack <command>\n\n" ++
-        "  add  Add entry\n" ++
-        "  ls   List entries"
-
-
-cmdNotFound :: String -> [String] -> IO ()
-cmdNotFound cmd _ = do
-    putStrLn $ "No such command: " ++ cmd
-    putStrLn cmds
-
-
-help :: [String] -> IO ()
-help _ =
-    putStrLn cmds
 
 
 dispatch :: String -> [String] -> IO ()
@@ -31,7 +16,7 @@ dispatch "list"   = ls
 dispatch "ls"     = ls
 dispatch "-h"     = help
 dispatch "--help" = help
-dispatch cmd      = cmdNotFound cmd
+dispatch cmd      = notFound cmd
 
 
 timeTrack = do
