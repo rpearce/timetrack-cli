@@ -19,6 +19,10 @@ dispatch "--help" = help
 dispatch cmd      = notFound cmd
 
 
-timeTrack = do
-    (cmd:argList) <- getArgs
-    dispatch cmd argList
+parse :: [String] -> IO ()
+parse (cmd:argList) = dispatch cmd argList
+parse _             = help Nothing
+
+
+timeTrack =
+    getArgs >>= parse

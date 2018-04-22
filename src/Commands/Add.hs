@@ -5,8 +5,7 @@ module Commands.Add
 
 import           Data.List        (lines, unlines)
 import           Entry
-import           Helpers          (getFilePath, indentedOutput, loadEntries,
-                                   nextRowNum, parseEntries, showOutput)
+import           Helpers          (getFilePath, indentedOutput, loadLines)
 import           System.Directory (removeFile, renameFile)
 import           System.IO        (readFile)
 
@@ -18,9 +17,8 @@ add ["--help"]      = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
 add [_]             = putStrLn "Not enough arguments provided.\nFor help: timetrack add --help"
 add [date, message] = do
     path <- getFilePath
-    loadedLines <- loadEntries
-    let entries = parseEntries loadedLines
-        index = nextRowNum entries
+    entries <- fmap parseLines loadLines
+    let index = nextRowNum entries
         newEntry = Entry { index = index, date = date, message = message }
         updatedEntries = entries ++ [newEntry]
         tmpPath = path ++ ".tmp"
