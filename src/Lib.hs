@@ -14,14 +14,14 @@ dispatch :: String -> [String] -> IO ()
 dispatch "add"    = add
 dispatch "list"   = ls
 dispatch "ls"     = ls
-dispatch "-h"     = help
-dispatch "--help" = help
-dispatch cmd      = notFound cmd
+dispatch "-h"     = const help
+dispatch "--help" = const help
+dispatch cmd      = const $ notFound cmd
 
 
 parse :: [String] -> IO ()
 parse (cmd:argList) = dispatch cmd argList
-parse _             = help Nothing
+parse _             = help
 
 
 timeTrack =

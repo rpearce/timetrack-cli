@@ -10,6 +10,6 @@ cmds =
         "  ls   List entries"
 
 
-help :: a -> IO ()
-help _ =
+help :: IO ()
+help =
     putStrLn cmds
