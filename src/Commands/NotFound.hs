@@ -6,7 +6,7 @@ module Commands.NotFound
 import           Commands.Help (help)
 
 
-notFound :: String -> a -> IO ()
-notFound cmd _ = do
+notFound :: String -> IO ()
+notFound cmd = do
     putStrLn $ "No such command: " ++ cmd
-    help Nothing
+    help

@@ -3,12 +3,13 @@ module Commands.List
     ) where
 
 
-import           Helpers (loadEntries, parseEntries, printEntries)
+import           Entry   (parseLines, printEntries)
+import           Helpers (loadLines)
 
 
 ls :: [String] -> IO ()
 ls _ = do
-    loadedLines <- loadEntries
+    loadedLines <- loadLines
     putStrLn "#  Date        Description"
     putStrLn "-  ----------  -----------"
-    printEntries $ parseEntries loadedLines
+    printEntries $ parseLines loadedLines
