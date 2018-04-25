@@ -11,7 +11,6 @@ module Entry
     ) where
 
 
-import           Helpers   (inc)
 import           System.IO (readFile)
 
 
@@ -29,7 +28,7 @@ instance Show Entry where
 
 nextRowNum :: [Entry] -> Integer
 nextRowNum =
-    inc . fromIntegral . length
+    succ . fromIntegral . length
 
 
 parse :: Integer -> String -> Entry
