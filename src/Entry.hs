@@ -18,12 +18,12 @@ data Entry = Entry
     { index   :: Integer
     , date    :: String
     , message :: String
-    }
+    } deriving (Show)
 
 
-instance Show Entry where
-    show (Entry index entry message) =
-        show index ++ "  " ++ entry ++ "  " ++ message
+showEntry :: Entry -> String
+showEntry (Entry index entry message) =
+    show index ++ "  " ++ entry ++ "  " ++ message
 
 
 nextRowNum :: [Entry] -> Integer
@@ -47,7 +47,7 @@ parseLines =
 
 printEntries :: [Entry] -> IO ()
 printEntries =
-    putStrLn . unlines . fmap show
+    putStrLn . unlines . fmap showEntry
 
 
 showOutput :: Entry -> String
