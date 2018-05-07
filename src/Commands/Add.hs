@@ -26,4 +26,4 @@ add [date, message] = do
     removeFile path
     renameFile tmpPath path
     putStrLn $ "=> Wrote to " ++ path
-    putStrLn $ indentedOutput $ show newEntry
+    putStrLn $ indentedOutput $ showEntry newEntry
