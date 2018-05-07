@@ -7,6 +7,7 @@ module Entry
     , nextRowNum
     , parseLines
     , printEntries
+    , showEntry
     , showOutput
     ) where
 
