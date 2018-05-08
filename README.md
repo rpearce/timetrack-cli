@@ -8,7 +8,7 @@ https://github.com/ginatrapani/todo.txt-cli.
 
 These files would be broken into current and archive files:
 * `~/.timetrack/timetrack.txt`: time tracking periods from the latest grouping (think pay-period)
-* `~/.timetrack/timetrack-archive.txt`: historical archive of trackings
+* `~/.timetrack/timetrack.old.txt`: historical archive of trackings
 
 Here's what the file contents look like:
 
