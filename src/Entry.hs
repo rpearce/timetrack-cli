@@ -23,8 +23,8 @@ data Entry = Entry
 
 
 showEntry :: Entry -> String
-showEntry (Entry index entry message) =
-    show index ++ "  " ++ entry ++ "  " ++ message
+showEntry (Entry index date message) =
+    show index ++ "  " ++ date ++ "  " ++ message
 
 
 nextRowNum :: [Entry] -> Integer
