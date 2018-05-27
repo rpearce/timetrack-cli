@@ -10,18 +10,15 @@ import           System.Directory (getAppUserDataDirectory)
 
 
 getFilePath :: IO FilePath
-getFilePath = do
-    path <- getAppUserDataDirectory "timetrack"
-    return $ path ++ "/timetrack.txt"
+getFilePath =
+    fmap (++ "/timetrack.txt") (getAppUserDataDirectory "timetrack")
 
 
 loadLines :: IO [String]
-loadLines = do
-    path <- getFilePath
-    contents <- readFile path
-    return $ lines contents
+loadLines =
+    fmap lines (getFilePath >>= readFile)
 
 
 indentedOutput :: String -> String
-indentedOutput str =
-    "   ├── " ++ str
+indentedOutput =
+    (++) "   ├── "
