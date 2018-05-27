@@ -24,7 +24,13 @@ data Entry = Entry
 
 showEntry :: Entry -> String
 showEntry (Entry index date message) =
-    show index ++ "  " ++ date ++ "  " ++ message
+    prettyIndex index ++ "  " ++ date ++ "  " ++ message
+
+
+prettyIndex :: Integer -> String
+prettyIndex n
+    | n < 10    = "0" ++ show n
+    | otherwise = show n
 
 
 nextRowNum :: [Entry] -> Integer

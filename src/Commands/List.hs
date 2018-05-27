@@ -8,8 +8,5 @@ import           Helpers (loadLines)
 
 
 ls :: [String] -> IO ()
-ls _ = do
-    loadedLines <- loadLines
-    putStrLn "#  Date        Description"
-    putStrLn "-  ----------  -----------"
-    printEntries $ parseLines loadedLines
+ls _ =
+    fmap parseLines loadLines >>= printEntries
