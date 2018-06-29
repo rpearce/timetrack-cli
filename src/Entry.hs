@@ -4,9 +4,9 @@ module Entry
             , index
             , message
             )
+    , listEntries
     , nextRowNum
     , parseLines
-    , printEntries
     , showEntry
     , showOutput
     ) where
@@ -20,8 +20,8 @@ data Entry = Entry
 
 
 showEntry :: Entry -> String
-showEntry (Entry index date message) =
-    prettyIndex index ++ "  " ++ date ++ "  " ++ message
+showEntry (Entry i d m) =
+    prettyIndex i ++ "  " ++ d ++ "  " ++ m
 
 
 prettyIndex :: Integer -> String
@@ -49,9 +49,9 @@ parseLines =
     zipWith parse [1..]
 
 
-printEntries :: [Entry] -> IO ()
-printEntries =
-    putStrLn . unlines . fmap showEntry
+listEntries :: [Entry] -> String
+listEntries =
+    unlines . fmap showEntry
 
 
 showOutput :: Entry -> String

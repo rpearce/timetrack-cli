@@ -2,6 +2,7 @@ module Helpers
     ( getFilePath
     , indentedOutput
     , loadLines
+    , mConst
     ) where
 
 
@@ -22,3 +23,8 @@ loadLines =
 indentedOutput :: String -> String
 indentedOutput =
     (++) "   ├── "
+
+
+mConst :: a -> b -> IO a
+mConst a =
+    const $ return a

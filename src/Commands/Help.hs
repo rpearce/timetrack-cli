@@ -3,13 +3,8 @@ module Commands.Help
     ) where
 
 
-cmds :: String
-cmds =
+help :: String
+help =
     "usage: timetrack <command>\n\n" ++
         "  add  Add entry\n" ++
         "  ls   List entries"
-
-
-help :: IO ()
-help =
-    putStrLn cmds

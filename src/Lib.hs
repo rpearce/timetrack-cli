@@ -7,22 +7,24 @@ import           Commands.Add       (add)
 import           Commands.Help      (help)
 import           Commands.List      (ls)
 import           Commands.NotFound  (notFound)
+import           Helpers            (mConst)
 import           System.Environment (getArgs)
 
 
-dispatch :: String -> [String] -> IO ()
+dispatch :: String -> [String] -> IO String
 dispatch "add"    = add
 dispatch "list"   = ls
 dispatch "ls"     = ls
-dispatch "-h"     = const help
-dispatch "--help" = const help
-dispatch cmd      = const $ notFound cmd
+dispatch "-h"     = mConst help
+dispatch "--help" = mConst help
+dispatch cmd      = mConst $ notFound cmd ++ "\n" ++ help
 
 
-parse :: [String] -> IO ()
+parse :: [String] -> IO String
 parse (cmd:argList) = dispatch cmd argList
-parse _             = help
+parse _             = return help
 
 
+timeTrack :: IO ()
 timeTrack =
-    getArgs >>= parse
+    putStrLn =<< parse =<< getArgs

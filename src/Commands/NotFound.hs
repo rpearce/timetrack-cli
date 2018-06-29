@@ -3,10 +3,6 @@ module Commands.NotFound
     ) where
 
 
-import           Commands.Help (help)
-
-
-notFound :: String -> IO ()
-notFound cmd = do
-    putStrLn $ "No such command: " ++ cmd
-    help
+notFound :: String -> String
+notFound cmd =
+    "No such command: " ++ cmd

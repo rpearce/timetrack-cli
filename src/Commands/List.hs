@@ -3,10 +3,10 @@ module Commands.List
     ) where
 
 
-import           Entry   (parseLines, printEntries)
+import           Entry   (listEntries, parseLines)
 import           Helpers (loadLines)
 
 
-ls :: [String] -> IO ()
+ls :: [String] -> IO String
 ls _ =
-    fmap parseLines loadLines >>= printEntries
+    fmap (listEntries . parseLines) loadLines
