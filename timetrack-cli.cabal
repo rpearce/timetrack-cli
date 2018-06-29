@@ -58,6 +58,7 @@ executable timetrack
                      , RankNTypes
                      , ScopedTypeVariables
                      , StandaloneDeriving
+                     , TemplateHaskell
                      , TupleSections
                      , TypeApplications
                      , TypeFamilies

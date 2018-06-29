@@ -10,11 +10,12 @@ import           System.Directory (removeFile, renameFile)
 import           System.IO        (readFile)
 
 
-add :: [String] -> IO ()
-add []              = putStrLn "No arguments provided.\nFor help: timetrack add --help"
-add ["-h"]          = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
-add ["--help"]      = putStrLn "usage: timetrack add YYYY-MM-DD \"message\""
-add [_]             = putStrLn "Not enough arguments provided.\nFor help: timetrack add --help"
+-- @TODO: REFACTOR
+add :: [String] -> IO String
+add []              = return "No arguments provided.\nFor help: timetrack add --help"
+add ["-h"]          = return "usage: timetrack add YYYY-MM-DD \"message\""
+add ["--help"]      = return "usage: timetrack add YYYY-MM-DD \"message\""
+add [_]             = return "Not enough arguments provided.\nFor help: timetrack add --help"
 add [date, message] = do
     path <- getFilePath
     entries <- fmap parseLines loadLines
@@ -25,5 +26,5 @@ add [date, message] = do
     writeFile tmpPath $ unlines $ fmap showOutput updatedEntries
     removeFile path
     renameFile tmpPath path
-    putStrLn $ "=> Wrote to " ++ path
-    putStrLn $ indentedOutput $ showEntry newEntry
+    let output = indentedOutput $ showEntry newEntry
+    return $ "=> Wrote to " ++ path ++ "\n" ++ output
