@@ -12,9 +12,6 @@ module Entry
     ) where
 
 
-import           System.IO (readFile)
-
-
 data Entry = Entry
     { index   :: Integer
     , date    :: String
