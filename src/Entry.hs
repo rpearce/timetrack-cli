@@ -4,12 +4,17 @@ module Entry
             , index
             , message
             )
+    , lastEntryFromString
     , listEntries
+    , loadEntries
     , nextRowNum
     , parseLines
     , showEntry
     , showOutput
     ) where
+
+
+import           Helpers (loadLines)
 
 
 data Entry = Entry
@@ -19,15 +24,19 @@ data Entry = Entry
     } deriving (Show)
 
 
-showEntry :: Entry -> String
-showEntry (Entry i d m) =
-    prettyIndex i ++ "  " ++ d ++ "  " ++ m
+lastEntryFromString :: String -> String
+lastEntryFromString =
+    showEntry . last . parseLines . lines
 
 
-prettyIndex :: Integer -> String
-prettyIndex n
-    | n < 10    = "0" ++ show n
-    | otherwise = show n
+listEntries :: [Entry] -> String
+listEntries =
+    unlines . fmap showEntry
+
+
+loadEntries :: FilePath -> IO [Entry]
+loadEntries path =
+    fmap parseLines (loadLines path)
 
 
 nextRowNum :: [Entry] -> Integer
@@ -49,9 +58,15 @@ parseLines =
     zipWith parse [1..]
 
 
-listEntries :: [Entry] -> String
-listEntries =
-    unlines . fmap showEntry
+prettyIndex :: Integer -> String
+prettyIndex n
+    | n < 10    = "0" ++ show n
+    | otherwise = show n
+
+
+showEntry :: Entry -> String
+showEntry (Entry i d m) =
+    prettyIndex i ++ "  " ++ d ++ "  " ++ m
 
 
 showOutput :: Entry -> String

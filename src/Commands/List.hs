@@ -4,9 +4,9 @@ module Commands.List
 
 
 import           Entry   (listEntries, parseLines)
-import           Helpers (loadLines)
+import           Helpers (getFilePath, loadLines)
 
 
 ls :: [String] -> IO String
 ls _ =
-    fmap (listEntries . parseLines) loadLines
+    fmap (listEntries . parseLines) (loadLines =<< getFilePath)
