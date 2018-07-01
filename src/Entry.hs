@@ -6,7 +6,6 @@ module Entry
     , loadEntries
     , parse
     , position
-    , nextRowNum
     , outputEntry
     , showEntriesWithIndex
     , showEntryWithIndex
@@ -30,11 +29,6 @@ data Entry = Entry
 loadEntries :: FilePath -> IO [Entry]
 loadEntries path =
     fmap (fmap parse) (loadLines path)
-
-
-nextRowNum :: [Entry] -> Integer
-nextRowNum =
-    succ . fromIntegral . length
 
 
 outputEntry :: Entry -> String
