@@ -3,10 +3,15 @@ module Commands.List
     ) where
 
 
-import           Entry   (listEntries, parseLines)
+import           Entry   (parse, showEntriesWithIndex)
 import           Helpers (getFilePath, loadLines)
 
 
 ls :: [String] -> IO String
 ls _ =
-    fmap (listEntries . parseLines) (loadLines =<< getFilePath)
+    fmap linesToString (loadLines =<< getFilePath)
+
+
+linesToString :: [String] -> String
+linesToString =
+    unlines . showEntriesWithIndex . fmap parse

@@ -18,18 +18,14 @@ add [date, message] = do
     path <- getFilePath
     entries <- E.loadEntries path
 
-    let output = fmap E.showOutput (entries ++ [E.Entry {
-        E.index = E.nextRowNum entries,
-        E.date = date,
-        E.message = message
-    }])
+    let newEntry = E.Entry { E.date = date, E.message = message }
+        updatedEntries = E.sortByDate (entries ++ [newEntry])
+        idx = E.position newEntry updatedEntries
+        output = fmap E.showEntry updatedEntries
 
-    msg =<< updateFileContent path (unlines output)
+    updateFileContent path (unlines output)
 
-
-msg :: (FilePath, String) -> IO String
-msg (path, content) =
     return $ "=> Wrote to "
         ++ path
         ++ "\n"
-        ++ indentedOutput (E.lastEntryFromString content)
+        ++ indentedOutput (E.showEntryWithIndex idx newEntry)
