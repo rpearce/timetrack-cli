@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import           Lib (timeTrack)
 
 main :: IO ()
 main = timeTrack
