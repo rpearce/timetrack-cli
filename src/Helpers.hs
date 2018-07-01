@@ -8,13 +8,13 @@ module Helpers
 
 
 import           Data.List        (lines, unlines)
-import           System.Directory (getAppUserDataDirectory, removeFile,
-                                   renameFile)
+import           System.Directory (XdgDirectory (XdgData), getXdgDirectory,
+                                   removeFile, renameFile)
 
 
 getFilePath :: IO FilePath
 getFilePath =
-    fmap (++ "/timetrack.txt") (getAppUserDataDirectory "timetrack")
+    fmap (++ "/timetrack.txt") (getXdgDirectory XdgData "timetrack")
 
 
 loadLines :: FilePath -> IO [String]
