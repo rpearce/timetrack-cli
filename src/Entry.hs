@@ -7,6 +7,7 @@ module Entry
     , parse
     , position
     , nextRowNum
+    , outputEntry
     , showEntriesWithIndex
     , showEntryWithIndex
     , showEntry
@@ -34,6 +35,11 @@ loadEntries path =
 nextRowNum :: [Entry] -> Integer
 nextRowNum =
     succ . fromIntegral . length
+
+
+outputEntry :: Entry -> String
+outputEntry (Entry d m) =
+    d ++ " " ++ m
 
 
 parse :: String -> Entry

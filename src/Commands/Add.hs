@@ -21,7 +21,7 @@ add [date, message] = do
     let newEntry = E.Entry { E.date = date, E.message = message }
         updatedEntries = E.sortByDate (entries ++ [newEntry])
         idx = E.position newEntry updatedEntries
-        output = fmap E.showEntry updatedEntries
+        output = fmap E.outputEntry updatedEntries
 
     updateFileContent path (unlines output)
 
