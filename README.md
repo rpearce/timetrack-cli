@@ -37,10 +37,8 @@ alias tt="timetrack"
 ### List entries
 ```
 $ tt ls
-#  Date        Description
--  ----------  -----------
-1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
-2  2017-06-02  @company2: searching functionality +8.0
+01  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+02  2017-06-02  @company2: searching functionality +8.0
 ```
 
 ### Adding a new entry
@@ -59,25 +57,25 @@ $ tt add 2017-12-25 "extracted JSON decoders – @elmcompany +2.0"
 Remove an entry by a line number
 ```
 $ tt ls
-1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
-2  2017-06-02  @company2: searching functionality +8.0
+01  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+02  2017-06-02  @company2: searching functionality +8.0
 
 $ tt rm 2
 => Removed from $XDG_DATA_HOME/timetrack.txt:
-   ├── 2  2017-06-02  @company2: searching functionality +8.0
+   ├── 02  2017-06-02  @company2: searching functionality +8.0
 ```
 
 ### Update an entry
 ```
 $ tt ls
-1  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
-2  2017-06-02  research and prototyping for @company3 +4.0
-3  2017-06-03  @company2: searching functionality +8.0
+01  2017-06-01  mailers, tests and bug fixes for @company1 +3.5
+02  2017-06-02  research and prototyping for @company3 +4.0
+03  2017-06-03  @company2: searching functionality +8.0
 
 $ tt update 2 2017-06-04 "meetings and more for @company3 +7.5"
 => Updated in $XDG_DATA_HOME/timetrack.txt:
-  (from) ├── 2  2017-06-02  research and prototyping for @company3 +4.0
-    (to) ├── 3  2017-06-04  meetings and more for @company3 +7.5
+  (from) ├── 02  2017-06-02  research and prototyping for @company3 +4.0
+    (to) ├── 03  2017-06-04  meetings and more for @company3 +7.5
 ```
 
 #### ARGUMENTS
