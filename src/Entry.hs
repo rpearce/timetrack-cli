@@ -1,42 +1,34 @@
 module Entry
     ( Entry ( Entry
             , date
-            , index
             , message
             )
-    , lastEntryFromString
-    , listEntries
     , loadEntries
+    , parse
+    , position
     , nextRowNum
-    , parseLines
+    , showEntriesWithIndex
+    , showEntryWithIndex
     , showEntry
-    , showOutput
+    , sortByDate
     ) where
 
 
-import           Helpers (loadLines)
+import           Data.List  (elemIndex, sortBy)
+import           Data.Maybe (fromJust)
+import           Data.Ord   (comparing)
+import           Helpers    (loadLines)
 
 
 data Entry = Entry
-    { index   :: Integer
-    , date    :: String
+    { date    :: String
     , message :: String
-    } deriving (Show)
-
-
-lastEntryFromString :: String -> String
-lastEntryFromString =
-    showEntry . last . parseLines . lines
-
-
-listEntries :: [Entry] -> String
-listEntries =
-    unlines . fmap showEntry
+    } deriving (Eq, Show)
 
 
 loadEntries :: FilePath -> IO [Entry]
 loadEntries path =
-    fmap parseLines (loadLines path)
+    fmap (fmap parse) (loadLines path)
 
 
 nextRowNum :: [Entry] -> Integer
@@ -44,18 +36,18 @@ nextRowNum =
     succ . fromIntegral . length
 
 
-parse :: Integer -> String -> Entry
-parse n line =
+parse :: String -> Entry
+parse line =
     let
         (date, rest) = splitAt 10 line
         message = drop 1 rest
     in
-        Entry { index = n, date = date, message = message }
+        Entry { date = date, message = message }
 
 
-parseLines :: [String] -> [Entry]
-parseLines =
-    zipWith parse [1..]
+position :: Entry -> [Entry] -> Integer
+position entry =
+    fromIntegral . maybe 0 (+1) . elemIndex entry
 
 
 prettyIndex :: Integer -> String
@@ -64,11 +56,21 @@ prettyIndex n
     | otherwise = show n
 
 
+sortByDate :: [Entry] -> [Entry]
+sortByDate =
+    sortBy $ comparing date
+
+
+showEntriesWithIndex :: [Entry] -> [String]
+showEntriesWithIndex =
+    zipWith showEntryWithIndex [1..]
+
+
+showEntryWithIndex :: Integer -> Entry -> String
+showEntryWithIndex idx entry =
+    prettyIndex idx ++ "  " ++ showEntry entry
+
+
 showEntry :: Entry -> String
-showEntry (Entry i d m) =
-    prettyIndex i ++ "  " ++ d ++ "  " ++ m
-
-
-showOutput :: Entry -> String
-showOutput entry =
-    date entry ++ " " ++ message entry
+showEntry (Entry d m) =
+    d ++ "  " ++ m
