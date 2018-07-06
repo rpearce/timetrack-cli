@@ -14,10 +14,9 @@ module Entry
     ) where
 
 
-import           Data.List  (elemIndex, sortBy)
-import           Data.Maybe (fromJust)
-import           Data.Ord   (comparing)
-import           Helpers    (loadLines)
+import           Data.List (elemIndex, sortBy)
+import           Data.Ord  (comparing)
+import           Helpers   (loadLines)
 
 
 data Entry = Entry
@@ -39,10 +38,10 @@ outputEntry (Entry d m) =
 parse :: String -> Entry
 parse line =
     let
-        (date, rest) = splitAt 10 line
-        message = drop 1 rest
+        (d, rest) = splitAt 10 line
+        m = drop 1 rest
     in
-        Entry { date = date, message = message }
+        Entry { date = d, message = m }
 
 
 position :: Entry -> [Entry] -> Integer

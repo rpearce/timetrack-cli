@@ -4,6 +4,7 @@ module Lib
 
 
 import           Commands.Add       (add)
+import           Commands.Dir       (dir)
 import           Commands.Help      (help)
 import           Commands.List      (ls)
 import           Commands.NotFound  (notFound)
@@ -13,6 +14,7 @@ import           System.Environment (getArgs)
 
 dispatch :: String -> [String] -> IO String
 dispatch "add"    = add
+dispatch "dir"    = dir
 dispatch "list"   = ls
 dispatch "ls"     = ls
 dispatch "-h"     = mConst help

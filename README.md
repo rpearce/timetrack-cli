@@ -7,8 +7,8 @@ hours in plain text files, similar to
 https://github.com/ginatrapani/todo.txt-cli.
 
 These files would be broken into current and archive files:
-* `$XDG_DATA_HOME/timetrack.txt`: time tracking periods from the latest grouping (think pay-period)
-* `$XDG_DATA_HOME/timetrack.old.txt`: historical archive of trackings
+* `$XDG_DATA_HOME/timetrack/timetrack.txt`: time tracking periods from the latest grouping (think pay-period)
+* `$XDG_DATA_HOME/timetrack/timetrack.old.txt`: historical archive of trackings
 
 Here's what the file contents look like:
 
@@ -44,7 +44,7 @@ $ tt ls
 ### Adding a new entry
 ```
 $ tt add 2017-12-25 "extracted JSON decoders – @elmcompany +2.0"
-=> Wrote to $XDG_DATA_HOME/timetrack.txt:
+=> Wrote to $XDG_DATA_HOME/timetrack/timetrack.txt:
    ├── 12  2017-06-03  extracted JSON decoders to separate file – @elmcompany +2.0
 ```
 
@@ -61,7 +61,7 @@ $ tt ls
 02  2017-06-02  @company2: searching functionality +8.0
 
 $ tt rm 2
-=> Removed from $XDG_DATA_HOME/timetrack.txt:
+=> Removed from $XDG_DATA_HOME/timetrack/timetrack.txt:
    ├── 02  2017-06-02  @company2: searching functionality +8.0
 ```
 
@@ -73,7 +73,7 @@ $ tt ls
 03  2017-06-03  @company2: searching functionality +8.0
 
 $ tt update 2 2017-06-04 "meetings and more for @company3 +7.5"
-=> Updated in $XDG_DATA_HOME/timetrack.txt:
+=> Updated in $XDG_DATA_HOME/timetrack/timetrack.txt:
   (from) ├── 02  2017-06-02  research and prototyping for @company3 +4.0
     (to) ├── 03  2017-06-04  meetings and more for @company3 +7.5
 ```
@@ -82,6 +82,12 @@ $ tt update 2 2017-06-04 "meetings and more for @company3 +7.5"
 * Line number
 * Date: `YYYY-MM-DD` format
 * Message: `"text"` format
+
+### Display Output File Directory
+```
+$ tt dir
+$XDG_DATA_HOME/timetrack/
+```
 
 ### Display Stats Info
 This is an expanding concept for `ls`, but the idea would be to display

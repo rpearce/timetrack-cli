@@ -3,18 +3,37 @@ module Commands.Add
     ) where
 
 
-import           Data.List (lines, unlines)
-import qualified Entry     as E
-import           Helpers   (getFilePath, indentedOutput, updateFileContent)
-import           System.IO (readFile)
+import qualified Entry   as E
+import           Helpers (getFilePath, indentedOutput, updateFileContent)
+
+
+moreArgs :: String
+moreArgs =
+    "Not enough arguments provided.\nFor help: timetrack add --help"
+
+
+noArgs :: String
+noArgs =
+    "No arguments provided.\nFor help: timetrack add --help"
+
+
+usage :: String
+usage =
+    "usage: timetrack add YYYY-MM-DD \"message\""
 
 
 add :: [String] -> IO String
-add []              = return "No arguments provided.\nFor help: timetrack add --help"
-add ["-h"]          = return "usage: timetrack add YYYY-MM-DD \"message\""
-add ["--help"]      = return "usage: timetrack add YYYY-MM-DD \"message\""
-add [_]             = return "Not enough arguments provided.\nFor help: timetrack add --help"
-add [date, message] = do
+add []              = return noArgs
+add ["-h"]          = return usage
+add ["--help"]      = return usage
+add [_]             = return moreArgs
+add [date, message] = handleAdd (date, message)
+add _               = return usage
+
+
+-- @TODO: safely do all this
+handleAdd :: (String, String) -> IO String
+handleAdd (date, message) = do
     path <- getFilePath
     entries <- E.loadEntries path
 
@@ -23,7 +42,7 @@ add [date, message] = do
         idx = E.position newEntry updatedEntries
         output = fmap E.outputEntry updatedEntries
 
-    updateFileContent path (unlines output)
+    _ <- updateFileContent path (unlines output)
 
     return $ "=> Wrote to "
         ++ path
