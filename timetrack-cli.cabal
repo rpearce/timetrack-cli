@@ -19,6 +19,7 @@ library
                      , Entry
                      , Helpers
                      , Commands.Add
+                     , Commands.Dir
                      , Commands.Help
                      , Commands.List
                      , Commands.NotFound

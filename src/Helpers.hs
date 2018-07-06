@@ -1,5 +1,6 @@
 module Helpers
-    ( getFilePath
+    ( getDirPath
+    , getFilePath
     , indentedOutput
     , loadLines
     , mConst
@@ -7,14 +8,18 @@ module Helpers
     ) where
 
 
-import           Data.List        (lines, unlines)
 import           System.Directory (XdgDirectory (XdgData), getXdgDirectory,
                                    removeFile, renameFile)
 
 
+getDirPath :: IO FilePath
+getDirPath =
+    getXdgDirectory XdgData "timetrack"
+
+
 getFilePath :: IO FilePath
 getFilePath =
-    fmap (++ "/timetrack.txt") (getXdgDirectory XdgData "timetrack")
+    fmap (++ "/timetrack.txt") getDirPath
 
 
 loadLines :: FilePath -> IO [String]
