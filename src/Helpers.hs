@@ -1,6 +1,5 @@
 module Helpers
-    ( dropK
-    , getDirPath
+    ( getDirPath
     , getFilePath
     , indentedOutput
     , loadLines
@@ -11,11 +10,6 @@ module Helpers
 
 import           System.Directory (XdgDirectory (XdgData), getXdgDirectory,
                                    removeFile, renameFile)
-
-
-dropK :: Int -> [a] -> [a]
-dropK k ks =
-    take k ks ++ drop (k + 1) ks
 
 
 getDirPath :: IO FilePath
