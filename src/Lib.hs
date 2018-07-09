@@ -8,6 +8,7 @@ import           Commands.Dir       (dir)
 import           Commands.Help      (help)
 import           Commands.List      (ls)
 import           Commands.NotFound  (notFound)
+import           Commands.Remove    (rm)
 import           Helpers            (mConst)
 import           System.Environment (getArgs)
 
@@ -17,6 +18,7 @@ dispatch "add"    = add
 dispatch "dir"    = dir
 dispatch "list"   = ls
 dispatch "ls"     = ls
+dispatch "rm"     = rm
 dispatch "-h"     = mConst help
 dispatch "--help" = mConst help
 dispatch cmd      = mConst $ notFound cmd ++ "\n" ++ help
