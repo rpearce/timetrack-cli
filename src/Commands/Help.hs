@@ -6,5 +6,7 @@ module Commands.Help
 help :: String
 help =
     "usage: timetrack <command>\n\n" ++
-        "  add  Add entry\n" ++
-        "  ls   List entries"
+        "  add   Add entry\n" ++
+        "  dir   Print timetrack directory\n" ++
+        "  ls    List entries\n" ++
+        "  rm    Remove entry"
