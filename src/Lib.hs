@@ -9,19 +9,24 @@ import           Commands.Help      (help)
 import           Commands.List      (ls)
 import           Commands.NotFound  (notFound)
 import           Commands.Remove    (rm)
+import           Commands.Update    (update)
 import           Helpers            (mConst)
 import           System.Environment (getArgs)
 
 
 dispatch :: String -> [String] -> IO String
-dispatch "add"    = add
-dispatch "dir"    = dir
-dispatch "list"   = ls
-dispatch "ls"     = ls
-dispatch "rm"     = rm
-dispatch "-h"     = mConst help
-dispatch "--help" = mConst help
-dispatch cmd      = mConst $ notFound cmd ++ "\n" ++ help
+dispatch "add"       = add
+dispatch "directory" = dir
+dispatch "dir"       = dir
+dispatch "list"      = ls
+dispatch "ls"        = ls
+dispatch "remove"    = rm
+dispatch "rm"        = rm
+dispatch "update"    = update
+dispatch "u"         = update
+dispatch "-h"        = mConst help
+dispatch "--help"    = mConst help
+dispatch cmd         = mConst $ notFound cmd ++ "\n" ++ help
 
 
 parse :: [String] -> IO String

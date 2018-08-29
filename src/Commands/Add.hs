@@ -38,7 +38,7 @@ handleAdd (date, message) = do
     entries <- E.loadEntries path
 
     let newEntry = E.Entry { E.date = date, E.message = message }
-        updatedEntries = E.sortByDate (entries ++ [newEntry])
+        updatedEntries = E.sortByDate (newEntry : entries)
         idx = E.position newEntry updatedEntries
         output = fmap E.outputEntry updatedEntries
 
