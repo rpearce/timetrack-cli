@@ -24,6 +24,7 @@ dispatch "remove"    = rm
 dispatch "rm"        = rm
 dispatch "update"    = update
 dispatch "u"         = update
+dispatch "help"      = mConst help
 dispatch "-h"        = mConst help
 dispatch "--help"    = mConst help
 dispatch cmd         = mConst $ notFound cmd ++ "\n" ++ help
