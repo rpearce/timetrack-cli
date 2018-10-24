@@ -19,11 +19,12 @@ noArgs =
 
 usage :: String
 usage =
-    "usage: timetrack add YYYY-MM-DD \"message\""
+    "Usage: timetrack add <YYYY-MM-DD> \"<MESSAGE>\""
 
 
 add :: [String] -> IO String
 add []              = return noArgs
+add ["help"]        = return usage
 add ["-h"]          = return usage
 add ["--help"]      = return usage
 add [_]             = return moreArgs

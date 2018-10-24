@@ -35,6 +35,7 @@ validLineNum =
 
 rm :: [String] -> IO String
 rm []         = return noArgs
+rm ["help"]   = return usage
 rm ["-h"]     = return usage
 rm ["--help"] = return usage
 rm [n]        = handleRm n

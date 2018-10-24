@@ -19,11 +19,12 @@ noArgs =
 
 usage :: String
 usage =
-    "Usage: timetrack update <LINE NUMBER> <DATE> <MESSAGE>"
+    "Usage: timetrack update <LINE NUMBER> <YYYY-MM-DD> \"<MESSAGE>\""
 
 
 update :: [String] -> IO String
 update []                 = return noArgs
+update ["help"]           = return usage
 update ["-h"]             = return usage
 update ["--help"]         = return usage
 update [n, date, message] = handleUpdate (n, date, message)
