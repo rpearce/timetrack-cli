@@ -14,8 +14,7 @@ module Entry
     ) where
 
 
-import           Data.List (elemIndex, sortBy)
-import           Data.Ord  (comparing)
+import           Data.List (elemIndex, sortOn)
 import           Helpers   (loadLines)
 
 
@@ -57,7 +56,7 @@ prettyIndex n
 
 sortByDate :: [Entry] -> [Entry]
 sortByDate =
-    sortBy $ comparing date
+    sortOn date
 
 
 showEntriesWithIndex :: [Entry] -> [String]
