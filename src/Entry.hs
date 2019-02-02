@@ -5,6 +5,7 @@ module Entry
             )
     , loadEntries
     , parse
+    , parseAmount
     , position
     , outputEntry
     , showEntriesWithIndex
@@ -14,7 +15,7 @@ module Entry
     ) where
 
 
-import           Data.List (elemIndex, sortOn)
+import           Data.List (elemIndex, filter, sortOn)
 import           Helpers   (loadLines)
 
 
@@ -41,6 +42,26 @@ parse line =
         m = drop 1 rest
     in
         Entry { date = d, message = m }
+
+
+parseAmount :: Entry -> Float
+parseAmount (Entry _ m) =
+    read (toNum m) :: Float
+    where
+        toNum = drop 1  . safeTime . words
+
+
+isTime :: String -> Bool
+isTime []      = False
+isTime ('+':_) = True
+isTime _       = False
+
+
+safeTime :: [String] -> String
+safeTime xs =
+    case filter isTime xs of
+        (x:_) -> x
+        _     -> "+0.0"
 
 
 position :: Entry -> [Entry] -> Integer
