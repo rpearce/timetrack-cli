@@ -103,7 +103,9 @@ analyses of data when requested. These could be sums, stats, whatever.
    Filter info results by date(s).
 
 ## Dev
-1. need to have [the Haskell stack tool](https://docs.haskellstack.org/en/stable/README/)
+1. need to have [the Haskell stack
+   tool](https://docs.haskellstack.org/en/stable/README/)
 1. Edit code in `src/` directory
-1. run `$ stack build --pedantic --copy-bins` to get a binary copied to `/usr/.local/bin`
+1. run `$ make` or `$ stack build --pedantic --copy-bins` to get a binary copied
+   to `/usr/.local/bin`
 1. use the CLI
