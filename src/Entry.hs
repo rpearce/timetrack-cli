@@ -15,8 +15,10 @@ module Entry
     ) where
 
 
-import           Data.List (elemIndex, filter, sortOn)
-import           Helpers   (loadLines)
+import           Data.List  (elemIndex, sortOn)
+import           Data.Maybe (fromMaybe, isJust)
+import           Helpers    (loadLines)
+import           Text.Read  (readMaybe)
 
 
 data Entry = Entry
@@ -44,21 +46,19 @@ parse line =
         Entry { date = d, message = m }
 
 
-parseAmount :: Entry -> Float
+parseAmount :: Entry -> Double
 parseAmount (Entry _ m) =
-    read . drop 1 . safeTime $ words m
+    fromMaybe 0.0 $ maybeAmount m
 
 
-isTime :: String -> Bool
-isTime ('+':_) = True
-isTime _       = False
-
-
-safeTime :: [String] -> String
-safeTime xs =
-    case filter isTime xs of
-        (x:_) -> x
-        _     -> "+0.0"
+maybeAmount :: String -> Maybe Double
+maybeAmount =
+     foldr foldTime Nothing . words
+     where
+         foldTime :: String -> Maybe Double -> Maybe Double
+         foldTime []     _     = Nothing
+         foldTime ('+':xs) acc = if isJust acc then acc else readMaybe xs
+         foldTime _        acc = acc
 
 
 position :: Entry -> [Entry] -> Integer
