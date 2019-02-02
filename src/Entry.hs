@@ -50,7 +50,6 @@ parseAmount (Entry _ m) =
 
 
 isTime :: String -> Bool
-isTime []      = False
 isTime ('+':_) = True
 isTime _       = False
 
