@@ -46,9 +46,7 @@ parse line =
 
 parseAmount :: Entry -> Float
 parseAmount (Entry _ m) =
-    read (toNum m) :: Float
-    where
-        toNum = drop 1  . safeTime . words
+    read . drop 1 . safeTime $ words m
 
 
 isTime :: String -> Bool
