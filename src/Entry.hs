@@ -15,6 +15,7 @@ module Entry
     ) where
 
 
+import           Data.Fixed (E2, Fixed)
 import           Data.List  (elemIndex, sortOn)
 import           Data.Maybe (fromMaybe, isJust)
 import           Helpers    (loadLines)
@@ -46,16 +47,16 @@ parse line =
         Entry { date = d, message = m }
 
 
-parseAmount :: Entry -> Double
+parseAmount :: Entry -> Fixed E2
 parseAmount (Entry _ m) =
     fromMaybe 0.0 $ maybeAmount m
 
 
-maybeAmount :: String -> Maybe Double
+maybeAmount :: String -> Maybe (Fixed E2)
 maybeAmount =
      foldr foldTime Nothing . words
      where
-         foldTime :: String -> Maybe Double -> Maybe Double
+         foldTime :: String -> Maybe (Fixed E2) -> Maybe (Fixed E2)
          foldTime []     _     = Nothing
          foldTime ('+':xs) acc = if isJust acc then acc else readMaybe xs
          foldTime _        acc = acc
