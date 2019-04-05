@@ -37,4 +37,4 @@ parse _             = return help
 
 timeTrack :: IO ()
 timeTrack =
-    putStrLn =<< parse =<< getArgs
+    putStr =<< parse =<< getArgs
