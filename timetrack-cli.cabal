@@ -1,7 +1,7 @@
 cabal-version:       2.4
 
 name:                timetrack-cli
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            ⏳ Use the command line to keep track of your working hours in plain text files
 -- description:
 homepage:            https://github.com/rpearce/timetrack-cli
