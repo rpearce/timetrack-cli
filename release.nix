@@ -30,16 +30,5 @@ let
 in
   {
     project = haskellPackages.project;
-    shell = haskellPackages.shellFor {
-      packages = p: with p; [
-        project
-      ];
-      buildInputs = with haskellPackages; [
-        cabal-install
-        ghcid
-        hlint
-        stylish-haskell
-      ];
-      withHoogle = true;
-    };
+    haskellPackages = haskellPackages;
   }
