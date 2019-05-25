@@ -3,19 +3,7 @@
 }:
 
 let
-  config = {
-    packageOverrides = pkgs: rec {
-      haskell = pkgs.haskell // {
-        packages = pkgs.haskell.packages // {
-          "${compiler}" = pkgs.haskell.packages."${compiler}".override {
-            overrides = haskellPackagesNew: haskellPackagesOld: rec {
-              project = haskellPackagesNew.callPackage ./project.nix { };
-            };
-          };
-        };
-      };
-    };
-  };
+  config = {};
 
   # Pinned nixpkgs
   bootstrap = import <nixpkgs> { };
@@ -29,10 +17,10 @@ let
   haskellPackages = pkgs.haskell.packages.${compiler};
 in
   {
-    project = haskellPackages.project;
+    timetrack-cli = haskellPackages.callPackage ./timetrack-cli.nix { };
     shell = haskellPackages.shellFor {
       packages = p: with p; [
-        project
+        timetrack-cli
       ];
       buildInputs = with haskellPackages; [
         cabal-install

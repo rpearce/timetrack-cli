@@ -1,8 +1,8 @@
 build:
-	nix-build --attr project release.nix
+	nix-build --attr timetrack-cli release.nix
 
 cabal:
-	nix-shell --pure -p cabal2nix --run "cabal2nix ." > project.nix
+	nix-shell --pure -p cabal2nix --run "cabal2nix ." > timetrack-cli.nix
 
 repl:
 	nix-shell --pure --run "cabal new-repl"
