@@ -2,7 +2,7 @@ build:
 	nix-build
 
 cabal:
-	nix-shell --pure -p cabal2nix --run "cabal2nix ." > timetrack-cli.nix
+	nix-shell --pure -p cabal2nix --run "cabal2nix ." > project.nix
 
 repl:
 	nix-shell --pure --run "cabal new-repl"
