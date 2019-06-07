@@ -1,7 +1,6 @@
 let
   config = {};
 
-  # Pinned nixpkgs
   bootstrap = import <nixpkgs> { };
   nixpkgs = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
   src = bootstrap.fetchFromGitHub {
