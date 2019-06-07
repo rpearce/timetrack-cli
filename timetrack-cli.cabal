@@ -29,8 +29,8 @@ common warning-flags
     -Wredundant-constraints
 
 common deps
-  build-depends:   base ^>=4.12.0.0
-                 , directory ^>=1.3.3.0
+  build-depends:       base ^>=4.12.0.0
+                     , directory ^>=1.3.3.0
 
 executable timetrack-cli
   import:              warning-flags,
