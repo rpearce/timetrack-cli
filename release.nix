@@ -16,8 +16,6 @@ in
       buildInputs = with haskellPackages; [
         cabal-install
         ghcid
-        hlint
-        stylish-haskell
       ];
       withHoogle = true;
     };
