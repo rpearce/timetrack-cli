@@ -1,8 +1,8 @@
-{ compiler ? "ghc865"
-, pkgs ? import ./pkgs.nix
-}:
+{ compiler ? "ghc881" }:
 
 let
+  sources = import ./nix/sources.nix;
+  pkgs = import sources.nixpkgs { config = { }; };
   haskellPackages = pkgs.haskell.packages.${compiler};
   project = haskellPackages.callPackage ./project.nix { };
 in
