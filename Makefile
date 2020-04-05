@@ -2,10 +2,7 @@ build:
 	nix-build
 
 cabal:
-	nix-shell \
-		--pure \
-		--packages cabal2nix \
-		--run "cabal2nix ." > project.nix
+	nix-shell --pure -p cabal2nix --run "cabal2nix ." > project.nix
 
 repl:
 	nix-shell --pure --run "cabal new-repl"
@@ -20,3 +17,6 @@ run:
 
 test:
 	nix-shell --pure --run "cabal new-test all"
+
+update_nixpkgs:
+	nix-shell --pure --run "niv update nixpkgs"

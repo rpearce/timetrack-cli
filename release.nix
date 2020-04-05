@@ -1,7 +1,8 @@
-{ compiler ? "ghc881" }:
+{ compiler ? "ghc883"
+, sources ? import ./nix/sources.nix
+}:
 
 let
-  sources = import ./nix/sources.nix;
   pkgs = import sources.nixpkgs { config = { }; };
   haskellPackages = pkgs.haskell.packages.${compiler};
   project = haskellPackages.callPackage ./project.nix { };
@@ -15,8 +16,14 @@ in
       ];
       buildInputs = with haskellPackages; [
         cabal-install
+        cabal2nix
         ghcid
+        hlint
+        niv
+        ormolu
+        pkgs.cacert
+        pkgs.nix
       ];
-      withHoogle = true;
+      #withHoogle = true;
     };
   }
